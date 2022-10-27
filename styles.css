@@ -11,3 +11,17 @@ body {
   text-decoration: line-through;
   color:grey;
 }
+
+li {
+  cursor: pointer;
+}
+
+.deleteButton {
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-size: .6em;
+  margin-left: 2em;
+  font-weight: bold;
+  color: red;
+  cursor: pointer;
+}
