@@ -2,6 +2,10 @@ const addTodo = document.querySelector("form");
 const ul = document.querySelector
 const toDoListUl = document.querySelector('#todo-list')
 
+const localState = {
+    todos: []
+}
+
 addTodo.addEventListener("submit", (event) => {
     event.preventDefault();
     fetch("http://localhost:3000/todos", {
@@ -25,7 +29,8 @@ function receiveDataFromServer() {
     fetch("http://localhost:3000/todos")
     .then(function (response) { return response.json() })
     .then(function (data) {
-        renderToDoList(data)
+        localState.todos = data
+        renderToDoList(localState.todos)
     })
 
 }
@@ -34,12 +39,14 @@ function renderToDoList (data) {
     toDoListUl.innerHTML = ''
     data.forEach((item) => {
         const li = document.createElement('li')
-        li.innerText = item.title
+        const toDoSpan = document.createElement('span')
+        toDoSpan.innerText = item.title
         if (item.completed === true) {
-            li.setAttribute('class', 'completed')
+            toDoSpan.setAttribute('class', 'completed')
         }
-        makeCompleteOrIncomplete(li, item)
+        makeCompleteOrIncomplete(toDoSpan, item)
         toDoListUl.appendChild(li)
+        li.appendChild(toDoSpan)
         deleteExtension(item, li)
     })
 }
@@ -68,8 +75,8 @@ function deleteListener(item, span){
     })
 }
 
-function makeCompleteOrIncomplete(li, item){
-    li.addEventListener('click', () => {
+function makeCompleteOrIncomplete(toDoSpan, item){
+    toDoSpan.addEventListener('click', () => {
         if (item.completed === true) {
             fetch(`http://localhost:3000/todos/${item.id}`, {
                 method: "PATCH",

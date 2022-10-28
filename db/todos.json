@@ -14,11 +14,6 @@
       "title": "Fix the gutters",
       "completed": true,
       "id": 3
-    },
-    {
-      "title": "Another item",
-      "completed": false,
-      "id": 4
     }
   ]
 }
