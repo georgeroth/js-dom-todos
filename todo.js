@@ -46,7 +46,7 @@ function renderToDoList (data) {
 
 function deleteExtension(item, li){
     const span = document.createElement('span')
-    span.innerText = "done"
+    span.innerText = "delete"
     span.setAttribute('class', 'deleteButton')
     li.appendChild(span)
     deleteListener(item, span)
